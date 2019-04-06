@@ -1,13 +1,18 @@
 ## Language
 [简体中文](https://github.com/kszitt/seamless-scroll-js/blob/master/README_CN.md)
 
+## Browser support
+| [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/edge.png" alt="IE" width="32px" height="32px" />](http://godban.github.io/browsers-support-badges/) | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/firefox.png" alt="Firefox" width="32px" height="32px" />](http://godban.github.io/browsers-support-badges/) | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/chrome.png" alt="Chrome" width="32px" height="32px" />](http://godban.github.io/browsers-support-badges/) | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/safari.png" alt="Safari" width="32px" height="32px" />](http://godban.github.io/browsers-support-badges/)
+|:---------:|:---------:|:---------:|:---------:|
+| IE10+ | &check;| &check; | &check; | &check;
+
 ## Install
 ``` javascript
 npm install seamless-scroll-js --save-dev
 ```
 
 ## USE
-### react or vue
+### react, vue
 ``` javascript
 import "seamless-scroll-js"
 ...
@@ -17,18 +22,12 @@ dom.SeamlessScroll([options]);
 ```
 ### html
 ``` html
-项目中的index.js
 Index.js in the project
 <script src="./index.js"></script>
 
 const dom = document.getElementById("dom");
 dom.SeamlessScroll([options]);
 ```
-
-## Browser support
-| [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/edge.png" alt="IE" width="32px" height="32px" />](http://godban.github.io/browsers-support-badges/) | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/firefox.png" alt="Firefox" width="32px" height="32px" />](http://godban.github.io/browsers-support-badges/) | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/chrome.png" alt="Chrome" width="32px" height="32px" />](http://godban.github.io/browsers-support-badges/) | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/safari.png" alt="Safari" width="32px" height="32px" />](http://godban.github.io/browsers-support-badges/)
-|:---------:|:---------:|:---------:|:---------:|
-| IE10+ | &check;| &check; | &check; | &check;
 
 ## API
 ### .SeamlessScroll([options])  

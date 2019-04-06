@@ -1,13 +1,18 @@
 ## 语言
 [English](https://github.com/kszitt/seamless-scroll-js/blob/master/README.md)
 
+## 浏览器兼容
+| [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/edge.png" alt="IE" width="32px" height="32px" />](http://godban.github.io/browsers-support-badges/) | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/firefox.png" alt="Firefox" width="32px" height="32px" />](http://godban.github.io/browsers-support-badges/) | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/chrome.png" alt="Chrome" width="32px" height="32px" />](http://godban.github.io/browsers-support-badges/) | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/safari.png" alt="Safari" width="32px" height="32px" />](http://godban.github.io/browsers-support-badges/)
+|:---------:|:---------:|:---------:|:---------:|
+| IE10+ | &check;| &check; | &check;
+
 ## 安装
 ``` javascript
 npm install seamless-scroll-js --save-dev
 ```
 
 ## 使用
-### react 或者 vue
+### react, vue
 ``` javascript
 import "seamless-scroll-js"
 ...
@@ -23,11 +28,6 @@ dom.SeamlessScroll([options]);
 const dom = document.getElementById("dom");
 dom.SeamlessScroll([options]);
 ```
-
-## 浏览器兼容
-| [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/edge.png" alt="IE" width="32px" height="32px" />](http://godban.github.io/browsers-support-badges/) | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/firefox.png" alt="Firefox" width="32px" height="32px" />](http://godban.github.io/browsers-support-badges/) | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/chrome.png" alt="Chrome" width="32px" height="32px" />](http://godban.github.io/browsers-support-badges/) | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/safari.png" alt="Safari" width="32px" height="32px" />](http://godban.github.io/browsers-support-badges/)
-|:---------:|:---------:|:---------:|:---------:|
-| IE10+ | &check;| &check; | &check;
 
 ## API
 ### .SeamlessScroll([options])  
