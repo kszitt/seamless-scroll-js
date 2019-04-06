@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>seamless scroll demo</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    .vertical {
+      margin: 50px;
+      width: 100px;
+      height: 150px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid red;
+    }
+    .vertical ul {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      list-style: none;
+    }
+    .vertical ul li {
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+    }
+    .vertical ul li:nth-child(odd) {
+      background: #A6A6A6;
+    }
+
+    .horizontal {
+      margin: 50px;
+      width: 250px;
+      height: 50px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid red;
+    }
+    .horizontal ul {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      display: flex;
+      list-style: none;
+    }
+    .horizontal ul li {
+      width: 50px;
+      min-width: 50px;
+      line-height: 50px;
+      text-align: center;
+    }
+    .horizontal ul li:nth-child(odd) {
+      background: #A6A6A6;
+    }
+  </style>
+</head>
+<body>
+  <div class="vertical">
+    <ul class="scroll1">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+      <li>7</li>
+      <li>8</li>
+      <li>9</li>
+      <li>10</li>
+    </ul>
+  </div>
+  <div class="vertical">
+    <ul class="scroll2">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+      <li>7</li>
+      <li>8</li>
+      <li>9</li>
+      <li>10</li>
+    </ul>
+  </div>
+  <div class="horizontal">
+    <ul id="scroll3">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+      <li>7</li>
+      <li>8</li>
+      <li>9</li>
+      <li>10</li>
+    </ul>
+  </div>
+  <div class="horizontal">
+    <ul id="scroll4">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+      <li>7</li>
+      <li>8</li>
+      <li>9</li>
+      <li>10</li>
+    </ul>
+  </div>
+  <script src="./index.js"></script>
+  <script>
+    var scroll1 = document.getElementsByClassName("scroll1")[0],
+      scroll2 = document.getElementsByClassName("scroll2")[0],
+      scroll3 = document.getElementById("scroll3"),
+      scroll4 = document.getElementById("scroll4");
+
+    scroll1.SeamlessScroll({
+      orientation: "top",
+      direction: 20*1000
+    });
+    scroll2.SeamlessScroll({
+      orientation: "bottom",
+      direction: 20*1000
+    });
+    scroll3.SeamlessScroll({
+      orientation: "left",
+      direction: 10*1000
+    });
+    scroll4.SeamlessScroll({
+      orientation: "right",
+      direction: 10*1000
+    });
+  </script>
+</body>
+</html>

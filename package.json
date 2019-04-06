@@ -1,0 +1,20 @@
+{
+  "name": "seamless-scroll-js",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "license": "ISC",
+  "author": "kszitt",
+  "homepage": "https://github.com/kszitt/react-native-sass-to-stylesheet.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kszitt/react-native-sass-to-stylesheet.git"
+  },
+  "keywords": [
+    "seamless",
+    "scroll",
+    "seamless-scroll",
+    "无缝滚动"
+  ]
+}
