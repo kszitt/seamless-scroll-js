@@ -1,9 +1,9 @@
 HTMLElement.prototype.SeamlessScroll = function(options) {
   var el = this,
     defaultOptions = {
-      orientation: "top",
+      direction: "top",
       property: "all",
-      direction: 20*1000,
+      duration: 20*1000,
       timingFunction: "linear",
       delay: 0,
       autoPlay: true
@@ -27,7 +27,7 @@ HTMLElement.prototype.SeamlessScroll = function(options) {
     time = browser === "Ie" ? 15 : undefined;
 
   // 是否启用
-  switch(options.orientation){
+  switch(options.direction){
     case "top":
     case "bottom":
       if(parentHeight > scrollHeight) return;
@@ -39,7 +39,7 @@ HTMLElement.prototype.SeamlessScroll = function(options) {
       length = Math.ceil(parentWidth/listWidth);
       break;
     default:
-      console.error("options.orientation是必须的!, 请输入(top|bottom|left|right)");
+      console.error("options.direction!, 请输入(top|bottom|left|right)");
       return;
   }
 
@@ -58,16 +58,16 @@ HTMLElement.prototype.SeamlessScroll = function(options) {
   function transitionEnd(){
     var style = {};
 
-    switch(options.orientation){
+    switch(options.direction){
       case "top":
         if(el.style.top === "0px"){
           style = setTransition();
           style.top = -scrollHeight + "px";
-          scrollStart();
+          onScrollStart();
         } else {
           style = setTransition(true);
           style.top = "0px";
-          if(el.style.top) scrollEnd();
+          if(el.style.top) onScrollEnd();
           setTimeout(transitionEnd, time);
         }
         break;
@@ -75,11 +75,11 @@ HTMLElement.prototype.SeamlessScroll = function(options) {
         if(el.style.top === -scrollHeight + "px"){
           style = setTransition();
           style.top = "0px";
-          scrollStart();
+          onScrollStart();
         } else {
           style = setTransition(true);
           style.top = -scrollHeight + "px";
-          if(el.style.top) scrollEnd();
+          if(el.style.top) onScrollEnd();
           setTimeout(transitionEnd, time);
         }
         break;
@@ -87,11 +87,11 @@ HTMLElement.prototype.SeamlessScroll = function(options) {
         if(el.style.left === "0px"){
           style = setTransition();
           style.left = -scrollWidth + "px";
-          scrollStart();
+          onScrollStart();
         } else {
           style = setTransition(true);
           style.left = "0px";
-          if(el.style.left) scrollEnd();
+          if(el.style.left) onScrollEnd();
           setTimeout(transitionEnd, time);
         }
         break;
@@ -99,11 +99,11 @@ HTMLElement.prototype.SeamlessScroll = function(options) {
         if(el.style.left === -scrollWidth + "px"){
           style = setTransition();
           style.left = "0px";
-          scrollStart();
+          onScrollStart();
         } else {
           style = setTransition(true);
           style.left = -scrollWidth + "px";
-          if(el.style.left) scrollEnd();
+          if(el.style.left) onScrollEnd();
           setTimeout(transitionEnd, time);
         }
         break;
@@ -144,19 +144,19 @@ HTMLElement.prototype.SeamlessScroll = function(options) {
     }
   }
 
-  function scrollStart(){
-    if(el.scrollStart) el.scrollStart();
+  function onScrollStart(){
+    if(el.onScrollStart) el.onScrollStart();
   }
 
-  function scrollEnd(){
-    if(el.scrollEnd) el.scrollEnd();
+  function onScrollEnd(){
+    if(el.onScrollEnd) el.onScrollEnd();
   }
 
   function setTransition(def){
 
     var style = {};
     style["transitionProperty"] = def ? "all" : options.property;
-    style["transitionDuration"] = (def ? 0 : options.direction) + "ms";
+    style["transitionDuration"] = (def ? 0 : options.duration) + "ms";
     style["transitionTimingFunction"] = def ? "ease" : options.timingFunction;
     style["transitionDelay"] = (def ? 0 : options.delay) + "ms";
 
