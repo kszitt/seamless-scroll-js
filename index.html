@@ -71,13 +71,10 @@
       <li>4</li>
       <li>5</li>
       <li>6</li>
-      <li>7</li>
-      <li>8</li>
-      <li>9</li>
-      <li>10</li>
     </ul>
   </div>
-  <div class="vertical">
+  <input type="text" id="input"/>
+  <!--<div class="vertical">
     <ul class="scroll2">
       <li>1</li>
       <li>2</li>
@@ -118,19 +115,29 @@
       <li>9</li>
       <li>10</li>
     </ul>
-  </div>
+  </div>-->
   <script src="./index.js"></script>
   <script>
     var scroll1 = document.getElementsByClassName("scroll1")[0],
       scroll2 = document.getElementsByClassName("scroll2")[0],
       scroll3 = document.getElementById("scroll3"),
-      scroll4 = document.getElementById("scroll4");
+      scroll4 = document.getElementById("scroll4"),
+      input = document.getElementById("input");
 
     scroll1.SeamlessScroll({
-      orientation: "top",
-      direction: 20*1000
+      direction: "top",
+      duration: 10*1000
     });
-    scroll2.SeamlessScroll({
+    input.onkeydown = function(e){
+      var value = e.target.value;
+      if(e.keyCode !== 13 || !value) return;
+
+      var li = document.createElement("li");
+      li.innerText = value;
+      scroll1.append(li);
+      scroll1.refresh();
+    }
+    /*scroll2.SeamlessScroll({
       orientation: "bottom",
       direction: 20*1000
     });
@@ -141,7 +148,7 @@
     scroll4.SeamlessScroll({
       orientation: "right",
       direction: 10*1000
-    });
+    });*/
   </script>
 </body>
 </html>

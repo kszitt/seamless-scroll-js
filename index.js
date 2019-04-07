@@ -14,45 +14,69 @@ HTMLElement.prototype.SeamlessScroll = function(options) {
   el.addEventListener("transitionend", transitionEnd, false);
 
   var parent = el.parentElement,
-    parentHeight = parent.offsetHeight,
-    parentWidth = parent.offsetWidth,
-    scrollHeight = el.offsetHeight,
-    scrollWidth = el.offsetWidth,
+    parentHeight, parentWidth,
+    scrollHeight, scrollWidth,
     firstList = el.firstElementChild,
-    list = el.getElementsByTagName(firstList.nodeName),
-    listHeight = firstList.offsetHeight,
-    listWidth = firstList.offsetWidth,
-    length = 0,
+    list = [],
+    listHeight, listWidth,
+    cacheLength, length,
     browser = navigatorUserAgent(),
     time = browser === "Ie" ? 15 : undefined;
 
-  // 是否启用
-  switch(options.direction){
-    case "top":
-    case "bottom":
-      if(parentHeight > scrollHeight) return;
-      length = Math.ceil(parentHeight/listHeight);
-      break;
-    case "left":
-    case "right":
-      if(parentWidth > scrollWidth) return;
-      length = Math.ceil(parentWidth/listWidth);
-      break;
-    default:
-      console.error("options.direction!, 请输入(top|bottom|left|right)");
-      return;
+  function refresh(){
+    for(var j = 0; j < list.length; j++){
+      if(list[j].getAttribute("append")){
+        el.removeChild(list[j]);
+        j--;
+      }
+    }
+
+    parentHeight = parent.offsetHeight;
+    parentWidth = parent.offsetWidth;
+    scrollHeight = el.offsetHeight;
+    scrollWidth = el.offsetWidth;
+    list = el.getElementsByTagName(firstList.nodeName);
+    listHeight = firstList.offsetHeight;
+    listWidth = firstList.offsetWidth;
+
+    switch(options.direction){
+      case "top":
+      case "bottom":
+        if(parentHeight > scrollHeight) return;
+
+        length = Math.ceil(parentHeight/listHeight);
+        break;
+      case "left":
+      case "right":
+        if(parentWidth > scrollWidth) return;
+
+        length = Math.ceil(parentWidth/listWidth);
+        break;
+      default:
+        console.error("options.direction!, 请输入(top|bottom|left|right)");
+        return;
+    }
+
+    if(cacheLength) {
+      // console.log("重新计算", list.length, length, options.duration, cacheLength);
+      options.duration = parseInt((list.length + length) * options.duration / cacheLength);
+    }
+
+    // console.log(options.duration);
+    for(var i = 0; i < length; i++){
+      append(el, list[i].outerHTML);
+    }
+    cacheLength = list.length;
   }
 
-  // 添加内容
-  for(var i = 0; i < length; i++){
-    append(el, list[i].outerHTML);
-  }
+  refresh();
 
   if(options.autoPlay){
     transitionEnd();
   }
 
   el.play = transitionEnd;
+  el.refresh = refresh;
 
   // 过渡停止时
   function transitionEnd(){
@@ -119,6 +143,7 @@ HTMLElement.prototype.SeamlessScroll = function(options) {
       temp.innerHTML = text;
       var frag = document.createDocumentFragment();
       while (temp.firstChild) {
+        temp.firstChild.setAttribute("append", true);
         frag.appendChild(temp.firstChild);
       }
       dom.appendChild(frag);
