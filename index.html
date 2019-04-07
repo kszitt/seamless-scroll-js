@@ -71,23 +71,26 @@
       <li>4</li>
       <li>5</li>
       <li>6</li>
-    </ul>
-  </div>
-  <input type="text" id="input"/>
-  <!--<div class="vertical">
-    <ul class="scroll2">
-      <li>1</li>
-      <li>2</li>
-      <li>3</li>
-      <li>4</li>
-      <li>5</li>
-      <li>6</li>
       <li>7</li>
       <li>8</li>
       <li>9</li>
       <li>10</li>
     </ul>
   </div>
+<div class="vertical">
+  <ul class="scroll2">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>9</li>
+    <li>10</li>
+  </ul>
+</div>
   <div class="horizontal">
     <ul id="scroll3">
       <li>1</li>
@@ -115,40 +118,30 @@
       <li>9</li>
       <li>10</li>
     </ul>
-  </div>-->
+  </div>
   <script src="./index.js"></script>
   <script>
     var scroll1 = document.getElementsByClassName("scroll1")[0],
       scroll2 = document.getElementsByClassName("scroll2")[0],
       scroll3 = document.getElementById("scroll3"),
-      scroll4 = document.getElementById("scroll4"),
-      input = document.getElementById("input");
+      scroll4 = document.getElementById("scroll4");
 
     scroll1.SeamlessScroll({
       direction: "top",
       duration: 10*1000
     });
-    input.onkeydown = function(e){
-      var value = e.target.value;
-      if(e.keyCode !== 13 || !value) return;
-
-      var li = document.createElement("li");
-      li.innerText = value;
-      scroll1.append(li);
-      scroll1.refresh();
-    }
-    /*scroll2.SeamlessScroll({
-      orientation: "bottom",
-      direction: 20*1000
+    scroll2.SeamlessScroll({
+      direction: "bottom",
+      duration: 20*1000
     });
     scroll3.SeamlessScroll({
-      orientation: "left",
-      direction: 10*1000
+      direction: "left",
+      duration: 10*1000
     });
     scroll4.SeamlessScroll({
-      orientation: "right",
-      direction: 10*1000
-    });*/
+      direction: "right",
+      duration: 10*1000
+    });
   </script>
 </body>
 </html>

@@ -35,7 +35,13 @@ HTMLElement.prototype.SeamlessScroll = function(options) {
     parentWidth = parent.offsetWidth;
     scrollHeight = el.offsetHeight;
     scrollWidth = el.offsetWidth;
-    list = el.getElementsByTagName(firstList.nodeName);
+    let listAll = el.childNodes;
+    list = [];
+    for(let i = 0; i < listAll.length; i++){
+      if(listAll[i].nodeType === 1){
+        list.push(listAll[i]);
+      }
+    }
     listHeight = firstList.offsetHeight;
     listWidth = firstList.offsetWidth;
 
@@ -43,14 +49,34 @@ HTMLElement.prototype.SeamlessScroll = function(options) {
       case "top":
       case "bottom":
         if(parentHeight > scrollHeight) return;
-
         length = Math.ceil(parentHeight/listHeight);
+
+        if(options.direction === "top"){
+          for(var i = 0; i < length; i++){
+            el.appendChild(getHtmlByStr(list[i].outerHTML));
+          }
+        } else {
+          for(var i = 0; i < length; i++){
+            el.insertBefore(getHtmlByStr(list[list.length - 1 - i].outerHTML), el.firstChild);
+          }
+          scrollHeight = el.offsetHeight;
+        }
         break;
       case "left":
       case "right":
         if(parentWidth > scrollWidth) return;
-
         length = Math.ceil(parentWidth/listWidth);
+
+        if(options.direction === "left"){
+          for(var i = 0; i < length; i++){
+            el.appendChild(getHtmlByStr(list[i].outerHTML));
+          }
+        } else {
+          for(var i = 0; i < length; i++){
+            el.insertBefore(getHtmlByStr(list[list.length - 1 - i].outerHTML), el.firstChild);
+          }
+          scrollWidth = el.offsetWidth;
+        }
         break;
       default:
         console.error("options.direction!, 请输入(top|bottom|left|right)");
@@ -62,10 +88,6 @@ HTMLElement.prototype.SeamlessScroll = function(options) {
       options.duration = parseInt((list.length + length) * options.duration / cacheLength);
     }
 
-    // console.log(options.duration);
-    for(var i = 0; i < length; i++){
-      append(el, list[i].outerHTML);
-    }
     cacheLength = list.length;
   }
 
@@ -76,7 +98,7 @@ HTMLElement.prototype.SeamlessScroll = function(options) {
   }
 
   el.play = transitionEnd;
-  el.refresh = refresh;
+  // el.refresh = refresh;
 
   // 过渡停止时
   function transitionEnd(){
@@ -96,13 +118,13 @@ HTMLElement.prototype.SeamlessScroll = function(options) {
         }
         break;
       case "bottom":
-        if(el.style.top === -scrollHeight + "px"){
+        if(el.style.top === -(scrollHeight - parentHeight) + "px"){
           style = setTransition();
-          style.top = "0px";
+          style.top = (parentHeight - length*listHeight) + "px";
           onScrollStart();
         } else {
           style = setTransition(true);
-          style.top = -scrollHeight + "px";
+          style.top = -(scrollHeight - parentHeight) + "px";
           if(el.style.top) onScrollEnd();
           setTimeout(transitionEnd, time);
         }
@@ -120,13 +142,13 @@ HTMLElement.prototype.SeamlessScroll = function(options) {
         }
         break;
       case "right":
-        if(el.style.left === -scrollWidth + "px"){
+        if(el.style.left === -(scrollWidth - parentWidth) + "px"){
           style = setTransition();
-          style.left = "0px";
+          style.left = (parentWidth - length*listWidth) + "px";
           onScrollStart();
         } else {
           style = setTransition(true);
-          style.left = -scrollWidth + "px";
+          style.left =-(scrollWidth - parentWidth) + "px";
           if(el.style.left) onScrollEnd();
           setTimeout(transitionEnd, time);
         }
@@ -137,19 +159,13 @@ HTMLElement.prototype.SeamlessScroll = function(options) {
   }
 
 
-  function append(dom, text) {
+  function getHtmlByStr(text) {
     if (typeof text === 'string') {
       var temp = document.createElement('div');
       temp.innerHTML = text;
-      var frag = document.createDocumentFragment();
-      while (temp.firstChild) {
-        temp.firstChild.setAttribute("append", true);
-        frag.appendChild(temp.firstChild);
-      }
-      dom.appendChild(frag);
-    } else {
-      dom.appendChild(text);
+      return temp.firstChild;
     }
+    return text;
   }
 
   // 判断是哪个浏览器
